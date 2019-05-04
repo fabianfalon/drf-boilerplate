@@ -23,6 +23,6 @@ class UserModelTest(TestCase):
 
     def test__str__(self):
         self.assertEqual(str(self.profile), 'jonsnow starck')
-    
+
     def test__publications_numbers(self):
         self.assertEqual(self.profile.publications_numbers, 0)
