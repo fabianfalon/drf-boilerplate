@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'usados.users.apps.UsersAppConfig',
+    'usados.publications.apps.PublicationsAppConfig',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

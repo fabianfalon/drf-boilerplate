@@ -18,7 +18,8 @@ class UserAPITestCase(APITestCase):
             "password_confirmation": "testeandopasss",
             "birthdate": "2001-05-12"
         }
-    ## singup tests
+    # singup tests
+
     def test_singup_success(self):
         """Verify singup succeed."""
         request = self.client.post(self.url, self.data, **{'wsgi.url_scheme': 'https'})
