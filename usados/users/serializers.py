@@ -1,8 +1,9 @@
-from .models import User, Profile
 from django.contrib.auth import authenticate, password_validation
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler
+from rest_framework_jwt.serializers import jwt_encode_handler, jwt_payload_handler
+
+from .models import Profile, User
 
 
 class TokenSerializer(serializers.Serializer):

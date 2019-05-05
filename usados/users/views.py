@@ -4,21 +4,15 @@ usados users api views
 
 import logging
 
-from .models import User
 # Django REST Framework
-# Permissions
-from rest_framework.permissions import (
-    AllowAny,
-    IsAuthenticated
-)
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
+# Permissions
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from .serializers import (
-    UserLoginSerializer, UserModelSerializer, UserSignUpSerializer,
-    ProfileModelSerializer
-)
+from .models import User
+from .serializers import ProfileModelSerializer, UserLoginSerializer, UserModelSerializer, UserSignUpSerializer
 
 logger = logging.getLogger(__name__)
 

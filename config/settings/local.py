@@ -1,8 +1,10 @@
 """Development settings."""
 
+import datetime
+
 from .base import *  # NOQA
 from .base import env
-import datetime
+
 # Base
 DEBUG = True
 

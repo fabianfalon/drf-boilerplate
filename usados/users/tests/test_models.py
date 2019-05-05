@@ -4,6 +4,7 @@ Usados users tests tests_models
 from __future__ import unicode_literals
 
 from django.test import TestCase
+
 from ..models import Profile, User
 
 
@@ -14,7 +15,7 @@ class UserModelTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             username='jonsnow', email='iknow@nothing.com', password='youknownothingjonsnow',
-            first_name='jonsnow', last_name="starck",
+            first_name='jon', last_name="snow",
         )
         self.profile = Profile.objects.create(
             id=244883570, user=self.user,
@@ -22,7 +23,7 @@ class UserModelTest(TestCase):
         )
 
     def test__str__(self):
-        self.assertEqual(str(self.profile), 'jonsnow starck')
+        self.assertEqual(str(self.profile), 'jon snow')
 
     def test__publications_numbers(self):
         self.assertEqual(self.profile.publications_numbers, 0)

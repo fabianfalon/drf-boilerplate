@@ -4,8 +4,9 @@ Usados tests serializers
 from __future__ import unicode_literals
 
 from django.test import TestCase
-from ..serializers import (ProfileModelSerializer, UserSignUpSerializer)
-from ..models import (User, Profile)
+
+from ..models import Profile, User
+from ..serializers import ProfileModelSerializer, UserSignUpSerializer
 
 
 # Create your tests here.

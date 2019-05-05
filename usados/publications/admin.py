@@ -4,7 +4,7 @@
 from django.contrib import admin
 
 # Models
-from .models import Category, Publications, PublicationPicture
+from .models import Category, PublicationPicture, Publications
 
 
 @admin.register(Category)

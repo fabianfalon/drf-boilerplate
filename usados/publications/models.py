@@ -78,7 +78,7 @@ class Publications(models.Model):
         _('is active'), default=True,
     )
     is_premium = models.BooleanField(
-        _('is premium'), default=True,
+        _('is premium'), default=False,
     )
     created = models.DateTimeField(
         _('created at'),
@@ -136,3 +136,7 @@ class PublicationPicture(models.Model):
         auto_now=True,
         help_text='Date time on which the object was last modified.'
     )
+
+    def __str__(self):
+        """Return pictures."""
+        return "{}".format(self.picture)

@@ -1,21 +1,14 @@
 """Celery tasks."""
 
-# Django
-from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils import timezone
-
-# Models
-from cride.users.models import User
-
-# Celery
-from celery.decorators import task, periodic_task
+from datetime import timedelta
 
 # Utilities
 import jwt
-import time
-from datetime import timedelta
+# Celery
+from celery.decorators import task
+# Django
+from django.conf import settings
+from django.utils import timezone
 
 
 def gen_verification_token(user):
@@ -34,4 +27,3 @@ def gen_verification_token(user):
 def send_confirmation_email(user_pk):
     """Send account verification link to given user."""
     pass
-
