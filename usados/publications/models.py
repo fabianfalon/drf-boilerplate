@@ -40,7 +40,10 @@ class Publications(models.Model):
         (1, 'new'),
         (2, 'old'),
     )
-    profile = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
+    profile = models.ForeignKey(
+        'users.Profile', on_delete=models.CASCADE,
+        related_name='publications',
+    )
     title = models.CharField(
         _('title'),
         max_length=255

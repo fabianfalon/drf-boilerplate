@@ -38,17 +38,27 @@ class UserAPITestCase(APITestCase):
             'category': self.category.id
         }
 
+    def test_get_publications_with_anonymous_user(self):
+        response = self.client.get(self.url, **{'wsgi.url_scheme': 'https'})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_get_publications_success(self):
         """Verify get publications succeed."""
         self.client.force_authenticate(self.user)
-        request = self.client.get(self.url, **{'wsgi.url_scheme': 'https'})
-        self.assertEqual(request.status_code, status.HTTP_200_OK)
+        response = self.client.get(self.url, **{'wsgi.url_scheme': 'https'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_post_publications_with_anonymous_user(self):
+        response = self.client.get(
+            self.url, self.data, **{'wsgi.url_scheme': 'https'}
+        )
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_post_publications_success(self):
         """Verify create publications succeed."""
         self.client.force_authenticate(self.user)
-        request = self.client.post(self.url, self.data, **{'wsgi.url_scheme': 'https'})
-        self.assertTrue(request.data['is_active'])
-        self.assertFalse(request.data['is_premium'])
-        self.assertEqual(request.status_code, status.HTTP_201_CREATED)
+        response = self.client.post(self.url, self.data, **{'wsgi.url_scheme': 'https'})
+        self.assertTrue(response.data['is_active'])
+        self.assertFalse(response.data['is_premium'])
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(self.profile.publications_numbers, 1)

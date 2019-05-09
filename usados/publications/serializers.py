@@ -5,15 +5,18 @@ from rest_framework.generics import get_object_or_404
 # Models
 from .models import Category, Publications
 
+# Serializers
+from usados.users.serializers import ProfileModelSerializer
 
 class PublicationsModelSerializer(serializers.ModelSerializer):
     """PublicationsModelSerializer"""
-    # profile = ProfileModelSerializer(read_only=True)
+    profile = ProfileModelSerializer(read_only=True)
     pictures = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Publications
         fields = (
+            'profile',
             'id',
             'title',
             'model',

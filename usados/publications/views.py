@@ -6,7 +6,7 @@ import logging
 
 from rest_framework import status, viewsets
 from rest_framework.exceptions import MethodNotAllowed
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .models import Publications
@@ -20,12 +20,12 @@ class PublicationsViewSet(viewsets.ModelViewSet):
     PublicationsViewSet
     """
     queryset = Publications.objects.all()
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (AllowAny, )
     serializer_class = PublicationsModelSerializer
 
-    def get_queryset(self):
-        """Filter publications by profile"""
-        return Publications.objects.filter(profile=self.request.user.profile)
+    # def get_queryset(self):
+    #     """Filter publications by profile"""
+    #     return Publications.objects.filter(profile=self.request.user.profile)
 
     def destroy(self, request, pk=None):
         raise MethodNotAllowed('DELETE')

@@ -126,3 +126,6 @@ class Profile(models.Model):
 
     def can_access(self):
         return True
+
+    def get_publications(self):
+        return self.publications.all()

@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 from .models import User
 from .serializers import ProfileModelSerializer, UserLoginSerializer, UserModelSerializer, UserSignUpSerializer
-
+from usados.publications.serializers import PublicationsModelSerializer
 logger = logging.getLogger(__name__)
 
 
@@ -76,3 +76,17 @@ class UserViewSet(viewsets.ModelViewSet):
         }
         response.data = data
         return response
+
+    @action(detail=True, methods=['get'])
+    def publications(self, request, *args, **kwargs):
+        """Return user publications."""
+        profile = request.user.profile
+        publications = profile.get_publications()
+        if publications:
+            data = PublicationsModelSerializer(publications, many=True).data
+            return Response(data)
+        else:
+            return Response(
+                {"message": "the user has not publications"},
+                status=status.HTTP_200_OK,
+            )

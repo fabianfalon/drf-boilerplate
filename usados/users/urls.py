@@ -10,6 +10,9 @@ from .views import UserViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='users')
+# router.register(
+#     r'users/<int:id>/publications', UserPublicationViewSet, basename='user_publications'
+# )
 
 urlpatterns = [
     path('', include(router.urls))
