@@ -2,13 +2,17 @@
 from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
 
-# Models
-from .models import Category, Publications
-
 # Serializers
 from usados.users.serializers import ProfileModelSerializer
 
-class PublicationsModelSerializer(serializers.ModelSerializer):
+# Models
+from .models import Category, Publications
+
+# Utils
+from usados.utils import DynamicFieldsModelSerializer
+
+
+class PublicationsModelSerializer(DynamicFieldsModelSerializer):
     """PublicationsModelSerializer"""
     profile = ProfileModelSerializer(read_only=True)
     pictures = serializers.StringRelatedField(many=True)

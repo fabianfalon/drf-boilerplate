@@ -11,9 +11,11 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
+from usados.publications.serializers import PublicationsModelSerializer
+
 from .models import User
 from .serializers import ProfileModelSerializer, UserLoginSerializer, UserModelSerializer, UserSignUpSerializer
-from usados.publications.serializers import PublicationsModelSerializer
+
 logger = logging.getLogger(__name__)
 
 

@@ -39,9 +39,8 @@ class UserLoginSerializer(serializers.Serializer):
         return self.context['user'], self.context['token']
 
 
-class UserModelSerializer(serializers.ModelSerializer):
+class UserModelSerializerToProfile(serializers.ModelSerializer):
     """User model serializer."""
-
     class Meta:
         """Meta class."""
 
@@ -49,12 +48,13 @@ class UserModelSerializer(serializers.ModelSerializer):
         fields = (
             'email',
             'first_name',
-            'last_name',
-            'profile',
+            'last_name'
         )
 
+
 class ProfileModelSerializer(serializers.ModelSerializer):
-    user =  UserModelSerializer(read_only=True)
+    user = UserModelSerializerToProfile(read_only=True)
+
     class Meta:
         model = Profile
         fields = (
@@ -65,6 +65,22 @@ class ProfileModelSerializer(serializers.ModelSerializer):
             'birthdate',
             'status',
             'picture'
+        )
+
+
+class UserModelSerializer(serializers.ModelSerializer):
+    """User model serializer."""
+    profile = ProfileModelSerializer(read_only=True)
+
+    class Meta:
+        """Meta class."""
+
+        model = User
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+            'profile',
         )
 
 

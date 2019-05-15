@@ -4,12 +4,19 @@ Usados publications api views
 
 import logging
 
+# Django rest framework
 from rest_framework import status, viewsets
 from rest_framework.exceptions import MethodNotAllowed
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter, OrderingFilter
 
+# Filters
+from django_filters.rest_framework import DjangoFilterBackend
+
+# Models
 from .models import Publications
+# Serializers
 from .serializers import PublicationCreateSerializer, PublicationsModelSerializer
 
 logger = logging.getLogger(__name__)
@@ -20,8 +27,21 @@ class PublicationsViewSet(viewsets.ModelViewSet):
     PublicationsViewSet
     """
     queryset = Publications.objects.all()
-    permission_classes = (AllowAny, )
     serializer_class = PublicationsModelSerializer
+
+    # filters
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
+    search_fields = ('title', 'model')
+    ordering_filters = ('price', 'model')
+    filterset_fields = ('is_active', 'model')
+
+    def get_permissions(self):
+        """Assign permissions based on action."""
+        if self.action in ['list']:
+            permissions = [AllowAny, ]
+        else:
+            permissions = [IsAuthenticated, ]
+        return [p() for p in permissions]
 
     # def get_queryset(self):
     #     """Filter publications by profile"""
@@ -40,4 +60,6 @@ class PublicationsViewSet(viewsets.ModelViewSet):
         publication = serializer.save()
 
         data = self.get_serializer(publication).data
-        return Response(data, status=status.HTTP_201_CREATED)
+        return Response(
+            data, status=status.HTTP_201_CREATED
+        )
