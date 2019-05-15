@@ -64,3 +64,17 @@ services:
     ports:
       - "5555:5555"
     command: /start-flower
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./compose/production/frontend/Dockerfile
+    image: usados_production_frontend
+    depends_on:
+      - django
+      - postgres
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    command: npm run build

@@ -1,15 +1,15 @@
 # BOILERPLATE
 
 ### Local Setup
-    boilerplate 
+    boilerplate with django rest framework and create react app (cra).
 
 ### 1 Run with docker
     $ docker-compose -f local.yml up
     $ docker-compose -f production.yml up
 
 ### 2 Initial migration
-    $ sudo docker-compose -f local.yml run --rm django python manage.py makemigrations
-    $ sudo docker-compose -f local.yml run --rm django python manage.py migrate
+    $ docker-compose -f local.yml run --rm django python manage.py makemigrations
+    $ docker-compose -f local.yml run --rm django python manage.py migrate
 
 ### RUN Tests
     $ docker-compose -f local.yml run --rm django pytest
@@ -28,3 +28,9 @@
 
 ### Restoring from the Existing Backup
     $ docker-compose -f local.yml exec postgres restore backup_2019_05_04T09_05_07.sql.gz
+
+### You can access shell in a container
+    $ docker exec -i -t django /bin/bash
+
+### Access to frontend
+    $ http://localhost:3000/
