@@ -30,7 +30,8 @@
     $ docker-compose -f local.yml exec postgres restore backup_2019_05_04T09_05_07.sql.gz
 
 ### You can access shell in a container
-    $ docker exec -i -t django /bin/bash
+    $ docker-compose -f local.yml run frontend sh
+    $ docker-compose -f local.yml run django sh
 
 ### Access to frontend
     $ http://localhost:3000/
