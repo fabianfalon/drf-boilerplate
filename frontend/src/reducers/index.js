@@ -2,13 +2,12 @@ import {combineReducers} from 'redux';
 import storageSession from 'redux-persist/lib/storage/session';
 import {LOGOUT} from '../actions/accounts';
 import publications from './publications';
-import accounts from './accounts';
-
+import account from './account';
 
 
 const appReducer = combineReducers({
   publications,
-  accounts,
+  account,
 });
 
 const rootReducer = (state, action) => {
