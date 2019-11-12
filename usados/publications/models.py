@@ -109,10 +109,7 @@ class Publications(models.Model):
 
     def change_status(self):
         """Change publication status"""
-        if self.is_active:
-            self.is_active = False
-        else:
-            self.is_active = True
+        self.is_active = False if self.is_active else True
         self.save()
 
 

@@ -1,7 +1,8 @@
 from django.contrib.auth import authenticate, password_validation
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from rest_framework_jwt.serializers import jwt_encode_handler, jwt_payload_handler
+# from rest_framework_jwt.serializers import jwt_encode_handler, jwt_payload_handler
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import Profile, User
 
@@ -28,15 +29,16 @@ class UserLoginSerializer(serializers.Serializer):
             raise serializers.ValidationError('Invalid credentials')
         if not user.profile.can_access():
             raise serializers.ValidationError('Account is not active')
-        payload = jwt_payload_handler(user)
+        # payload = jwt_payload_handler(user)
         self.context['user'] = user
-        token = jwt_encode_handler(payload)
-        self.context['token'] = token
+        refresh = RefreshToken.for_user(user)
+        self.context['refresh'] = str(refresh)
+        self.context['access'] = str(refresh.access_token)
         return data
 
     def create(self, data):
         """Generate or retrieve new token."""
-        return self.context['user'], self.context['token']
+        return self.context['user'], self.context['access'], self.context['refresh']
 
 
 class UserModelSerializerToProfile(serializers.ModelSerializer):

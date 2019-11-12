@@ -4,6 +4,7 @@ usados users api views
 
 import logging
 
+from django.contrib.auth.models import update_last_login
 # Django REST Framework
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -38,10 +39,12 @@ class UserViewSet(viewsets.ModelViewSet):
         """User sign in."""
         serializer = UserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user, token = serializer.save()
+        user, access, refresh = serializer.save()
+        update_last_login(None, user)
         data = {
             'user': UserModelSerializer(user).data,
-            'access_token': token
+            'access': access,
+            'refresh': refresh
         }
         return Response(data, status=status.HTTP_201_CREATED)
 

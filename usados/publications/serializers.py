@@ -65,5 +65,5 @@ class PublicationCreateSerializer(serializers.Serializer):
             return publication
         else:
             raise serializers.ValidationError(
-                'You dont have more free publications.'
+                'You can only have 5 free publications'
             )
