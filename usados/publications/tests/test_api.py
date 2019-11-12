@@ -2,9 +2,9 @@
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from usados.users.models import Profile, User
+from usados.users.tests.factories import ProfileFactory, UserFactory
 
-from ..models import Category
+from .factories import CategoryFactory
 
 
 class UserAPITestCase(APITestCase):
@@ -12,18 +12,10 @@ class UserAPITestCase(APITestCase):
 
     def setUp(self):
         """Test case setup."""
-        self.user = User.objects.create_user(
-            username='jonsnow', email='iknow@nothing.com',
-            password='youknownothingjonsnow',
-            first_name='jons', last_name="now",
-        )
-        self.profile = Profile.objects.create(
-            id=244883570, user=self.user,
-            birthdate="1991-06-17"
-        )
-        self.category = Category.objects.create(
-            name="categoria de prueba"
-        )
+        self.user = UserFactory()
+        self.profile = ProfileFactory(user=self.user)
+        self.category = CategoryFactory()
+
         # URL
         self.url = '/api/v1/publications/'
         self.url_with_params = self.url + '?search=2005'

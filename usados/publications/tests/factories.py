@@ -16,7 +16,7 @@ class PublicationFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = Publications
-    
+
     profile = factory.SubFactory(ProfileFactory)
     title = factory.Sequence(lambda n: 'title_%d' % n)
     model = factory.Sequence(lambda n: 'model_%d' % n)

@@ -10,8 +10,7 @@ class UserFactory(factory.DjangoModelFactory):
     email = factory.LazyAttribute(lambda o: '%s@example.org' % o.username)
     first_name = factory.Sequence(lambda n: 'name%s' % n)
     last_name = factory.Sequence(lambda n: 'last_name%s' % n)
-    email = factory.LazyAttribute(lambda o: '%s@example.org' % o.username)
-    password='youknownothingjonsnow'
+    password = 'youknownothingjonsnow'
 
 
 class ProfileFactory(factory.DjangoModelFactory):
@@ -19,5 +18,4 @@ class ProfileFactory(factory.DjangoModelFactory):
         model = Profile
 
     user = factory.SubFactory(UserFactory)
-    birthdate="1991-06-17"
-
+    birthdate = "1991-06-17"

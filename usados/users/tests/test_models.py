@@ -5,7 +5,8 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 
-from ..models import Profile, User
+from ..models import User
+from usados.users.tests.factories import ProfileFactory
 
 
 # Create your tests here.
@@ -17,10 +18,7 @@ class UserModelTest(TestCase):
             username='jonsnow', email='iknow@nothing.com', password='youknownothingjonsnow',
             first_name='jon', last_name="snow",
         )
-        self.profile = Profile.objects.create(
-            id=244883570, user=self.user,
-            birthdate="1991-06-17"
-        )
+        self.profile = self.profile = ProfileFactory(user=self.user)
 
     def test__str__(self):
         self.assertEqual(str(self.profile), 'jon snow')

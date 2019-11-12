@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 
-from ..models import Publications
 from .factories import CategoryFactory, PublicationFactory
 
 
@@ -18,7 +17,7 @@ class PublicationModelTest(TestCase):
         self.publication = PublicationFactory()
 
     def test_category__str__(self):
-        self.assertEqual(str(self.category), 'Category: category_0')
+        self.assertEqual(str(self.category), 'Category: category_5')
 
     def test_category_is_active(self):
         self.assertTrue(self.category.is_active)
